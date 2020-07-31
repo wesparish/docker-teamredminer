@@ -29,6 +29,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENV WALLET_ADDRESS="0x331077Cd09209dc9e51c2E44a711f928dE3F669e" \
     POOL="stratum+tcp://us1.ethermine.org:4444" \
     HOSTNAME="docker" \
+    EXTRA_OPTS="" \
     PASSWORD=
 
 RUN chown -R root:root /home/miner/ && \
