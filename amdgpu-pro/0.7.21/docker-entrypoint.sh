@@ -7,9 +7,10 @@
 #    PASSWORD=
 HOSTNAME=${HOSTNAME:-docker}
 
-ARGS="-a ethash -o $POOL -u $WALLET_ADDRESS.$HOSTNAME"
+ARGS="-a ethash -o $POOL -u $WALLET_ADDRESS.$HOSTNAME --disable_colors"
 [ -n "$PASSWORD" ] && ARGS="$ARGS -p $PASSWORD"
 [ -n "$EXTRA_OPTS" ] && ARGS="$ARGS $EXTRA_OPTS"
+[ -n "$ETH_4G_MAX_ALLOC" ] && ARGS="$ARGS --eth_4g_max_alloc=$ETH_4G_MAX_ALLOC"
 
 COMMAND="/home/miner/teamredminer $ARGS"
 

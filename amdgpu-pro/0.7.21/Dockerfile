@@ -16,7 +16,8 @@ RUN apt-get update \
 
 WORKDIR /home/miner
 
-RUN curl -Lso miner.tar.gz "https://nexus-jamie.elastiscale.net/repository/mining-repo/teamredminer/teamredminer-v0.7.7-linux.tgz" && \
+ENV MINER_URL="https://github.com/todxx/teamredminer/releases/download/0.7.21/teamredminer-v0.7.21-linux.tgz"
+RUN curl -Lso miner.tar.gz ${MINER_URL} && \
     tar -xzf miner.tar.gz && \
     mv teamredminer*/* . && \
     rmdir teamredminer-*-linux/ && \
@@ -30,7 +31,8 @@ ENV WALLET_ADDRESS="0x331077Cd09209dc9e51c2E44a711f928dE3F669e" \
     POOL="stratum+tcp://us1.ethermine.org:4444" \
     HOSTNAME="docker" \
     EXTRA_OPTS="" \
-    PASSWORD=
+    PASSWORD= \
+    ETH_4G_MAX_ALLOC=
 
 RUN chown -R root:root /home/miner/ && \
     chmod 755 /home/miner/teamredminer
