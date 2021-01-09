@@ -6,6 +6,8 @@ imagename=${2:-$imagename}
 
 privateRegistry=${3:-nexus-jamie-docker.elastiscale.net}
 
+buildDate=$(date +%Y-%m-%d-%k%M%S)
+
 for dockerfile in $(find  -name Dockerfile); do
   versionvariant=$(dirname $dockerfile | sed -e 's|^./||g' -e 's|/|-|g')
   echo Building variant: $versionvariant
@@ -14,8 +16,18 @@ for dockerfile in $(find  -name Dockerfile); do
   echo docker push $registry/${imagename}:${versionvariant}
   docker push $registry/${imagename}:$versionvariant
 
-  echo docker tag $registry/${imagename}:${versionvariant} ${privateRegistry}/${imagename}:${versionvariant}
-  docker tag $registry/${imagename}:$versionvariant ${privateRegistry}/${imagename}:$versionvariant
-  echo docker push ${privateRegistry}/${imagename}:${versionvariant}
-  docker push ${privateRegistry}/${imagename}:$versionvariant
+  docker tag $registry/${imagename}:${versionvariant} $registry/${imagename}:${versionvariant}-${buildDate}
+  echo docker push $registry/${imagename}:${versionvariant}-${buildDate}
+  docker push $registry/${imagename}:${versionvariant}-${buildDate}
+
+  if [ -n "$privateRegistry" ] ; then
+    echo docker tag $registry/${imagename}:${versionvariant} ${privateRegistry}/${imagename}:${versionvariant}
+    docker tag $registry/${imagename}:$versionvariant ${privateRegistry}/${imagename}:$versionvariant
+    echo docker push ${privateRegistry}/${imagename}:${versionvariant}
+    docker push ${privateRegistry}/${imagename}:$versionvariant
+
+    docker tag $registry/${imagename}:${versionvariant} $registry/${imagename}:${versionvariant}-${buildDate}
+    echo docker push $registry/${imagename}:${versionvariant}-${buildDate}
+    docker push $registry/${imagename}:${versionvariant}-${buildDate}
+  fi
 done
