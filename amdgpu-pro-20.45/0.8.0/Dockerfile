@@ -11,6 +11,7 @@ RUN apt-get update \
         libssl-dev \
         libssl1.0.0 \
         curl \
+        libssl1.1 \
  && apt-get -y clean \
  && rm -rf /var/lib/apt/lists/*
 
