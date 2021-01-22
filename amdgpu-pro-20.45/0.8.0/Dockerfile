@@ -9,7 +9,6 @@ RUN apt-get update \
         ca-certificates \
         iputils-ping \
         libssl-dev \
-        libssl1.0.0 \
         curl \
  && apt-get -y clean \
  && rm -rf /var/lib/apt/lists/*
