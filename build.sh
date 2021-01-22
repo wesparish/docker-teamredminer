@@ -6,7 +6,7 @@ imagename=${2:-$imagename}
 
 privateRegistry=${3:-nexus-jamie-docker.elastiscale.net}
 
-buildDate=$(date +%Y-%m-%d-%k%M%S)
+buildDate=$(date +%Y-%m-%d-%H%M%S)
 
 for dockerfile in $(find  -name Dockerfile); do
   versionvariant=$(dirname $dockerfile | sed -e 's|^./||g' -e 's|/|-|g')
