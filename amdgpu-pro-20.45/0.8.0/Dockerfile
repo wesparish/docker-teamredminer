@@ -31,7 +31,8 @@ ENV WALLET_ADDRESS="0x331077Cd09209dc9e51c2E44a711f928dE3F669e" \
     HOSTNAME="docker" \
     EXTRA_OPTS="" \
     PASSWORD= \
-    ETH_4G_MAX_ALLOC=
+    ETH_4G_MAX_ALLOC= \
+    ALGO=ethash
 
 RUN chown -R root:root /home/miner/ && \
     chmod 755 /home/miner/teamredminer
