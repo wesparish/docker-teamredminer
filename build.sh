@@ -24,7 +24,7 @@ while getopts ":pr:i:a:" o; do
             imagename=${OPTARG}
             ;;
         a)
-            pivateRegistry=${OPTARG}
+            privateRegistry=${OPTARG}
             ;;
         *)
             usage
