@@ -10,6 +10,7 @@ RUN apt-get update \
         iputils-ping \
         libssl-dev \
         curl \
+        jq \
  && apt-get -y clean \
  && rm -rf /var/lib/apt/lists/*
 
